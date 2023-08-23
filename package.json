@@ -1,19 +1,22 @@
 {
-  "private": true,
-  "author": "ZeratullZhou <zkh_1992@163.com>",
-  "scripts": {
-    "dev": "umi dev",
-    "build": "umi build",
-    "postinstall": "umi setup",
-    "setup": "umi setup",
-    "start": "npm run dev"
-  },
-  "dependencies": {
-    "umi": "^4.0.76"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.33",
-    "@types/react-dom": "^18.0.11",
-    "typescript": "^5.0.3"
-  }
+    "private": true,
+    "author": "ZeratullZhou <zkh_1992@163.com>",
+    "scripts": {
+        "dev": "umi dev",
+        "build": "umi build",
+        "postinstall": "umi setup",
+        "setup": "umi setup",
+        "start": "npm run dev"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^5.2.5",
+        "antd": "^5.8.4",
+        "umi": "^4.0.76"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.33",
+        "@types/react-dom": "^18.0.11",
+        "prettier": "^3.0.2",
+        "typescript": "^5.0.3"
+    }
 }

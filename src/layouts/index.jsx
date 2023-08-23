@@ -1,21 +1,33 @@
-import { Link, Outlet } from 'umi';
+import { history, Outlet } from 'umi';
 import styles from './index.less';
+import { Menu } from 'antd';
+import { useState } from 'react';
+import { InfoCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
+const items = [
+    {
+        label: '道德测试',
+        key: '/',
+        icon: <CheckCircleOutlined />,
+    },
+    {
+        label: '道德规则',
+        key: '/rule',
+        icon: <InfoCircleOutlined />,
+    },
+];
 export default function Layout() {
-  return (
-    <div className={styles.navs}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/docs">Docs</Link>
-        </li>
-        <li>
-          <a href="https://github.com/umijs/umi">Github</a>
-        </li>
-      </ul>
-        <Outlet />
-    </div>
-  );
+    const [current, setCurrent] = useState('/');
+    const onClick = e => {
+        console.log('click ', e);
+        setCurrent(e.key);
+        history.push(e.key);
+    };
+
+    return (
+        <div className={styles.navs}>
+            <Menu  items={items} onClick={onClick} selectedKeys={[current]} mode="horizontal" />
+            <Outlet />
+        </div>
+    );
 }
