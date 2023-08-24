@@ -1,5 +1,6 @@
-import { Button, Form, Select } from 'antd';
+import { Button, Form, Select, Space } from 'antd';
 import { useState } from 'react';
+import styles from './index.less'
 import rules from '../public/rules';
 
 const { data } = rules;
@@ -28,8 +29,9 @@ export default function HomePage() {
     };
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <h2>欢迎来到道德测试表</h2>
+            <p>可以点击顶部道德规则导航栏查看具体规则</p>
             <p>请如实填写以下表单</p>
             <Form
                 name="basic"
@@ -49,10 +51,15 @@ export default function HomePage() {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
+                <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                 {data.map((item, index) => {
                     if (item.children) {
                         return (
                             <Form.Item
+                                style={{
+                                    margin: "0 auto",
+                                    width: '50%',
+                                }}
                                 key={item.type}
                                 label={item.type}
                                 name={item.type}
@@ -64,9 +71,6 @@ export default function HomePage() {
                                 ]}
                             >
                                 <Select
-                                    style={{
-                                        width: '50%',
-                                    }}
                                     value={method[index].state}
                                     options={item.children.map(i => {
                                         return {
@@ -92,6 +96,7 @@ export default function HomePage() {
                         提交
                     </Button>
                 </Form.Item>
+                </Space>
             </Form>
             {finish ? <h2>{`你的性道德得分是${score}`}</h2> : <></>}
         </div>

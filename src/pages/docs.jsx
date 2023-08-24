@@ -26,6 +26,7 @@ const DocsPage = () => {
     return (
         <div>
             <Table
+                expandable={{ defaultExpandAllRows: true }}
                 columns={columns}
                 dataSource={data}
                 pagination={{
