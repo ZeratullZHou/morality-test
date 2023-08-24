@@ -1,14 +1,32 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Select } from 'antd';
+import { useState } from 'react';
 import rules from '../public/rules';
 
+const { data } = rules;
 export default function HomePage() {
+    const [chuguiValue, setChugui] = useState();
+    const [pituiValue, setPitui] = useState();
+    const [banlvValue, setBanlv] = useState();
+    const [weifaValue, setWeifa] = useState();
+    const [finish, setFinish] = useState(false);
+    const [score, setScore] = useState();
+    const method = [
+        { state: chuguiValue, setState: setChugui },
+        { state: pituiValue, setState: setPitui },
+        { state: banlvValue, setState: setBanlv },
+        { state: weifaValue, setState: setWeifa },
+    ];
     const onFinish = values => {
         console.log('Success:', values);
+        let s = 100;
+        Object.values(values).forEach(item=> s-=item)
+        setScore(s);
+        setFinish(true);
     };
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
     };
-    const { ruleType } = rules;
+
     return (
         <div>
             <h2>欢迎来到道德测试表</h2>
@@ -31,23 +49,38 @@ export default function HomePage() {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                {ruleType.map(item => {
-                    return item.subType.map(i => {
+                {data.map((item, index) => {
+                    if (item.children) {
                         return (
                             <Form.Item
-                                label={i.name}
-                                name={i.name}
+                                key={item.type}
+                                label={item.type}
+                                name={item.type}
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your username!',
+                                        message: '请选择!',
                                     },
                                 ]}
                             >
-                                <Checkbox />
+                                <Select
+                                    style={{
+                                        width: '50%',
+                                    }}
+                                    value={method[index].state}
+                                    options={item.children.map(i => {
+                                        return {
+                                            value: i.score,
+                                            label: i.type,
+                                        };
+                                    })}
+                                    onChange={e => {
+                                        method[index].setState(e);
+                                    }}
+                                />
                             </Form.Item>
                         );
-                    });
+                    } else return <Form.Item label={item.type} name={item.type} />;
                 })}
                 <Form.Item
                     wrapperCol={{
@@ -56,10 +89,11 @@ export default function HomePage() {
                     }}
                 >
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        提交
                     </Button>
                 </Form.Item>
             </Form>
+            {finish ? <h2>{`你的性道德得分是${score}`}</h2> : <></>}
         </div>
     );
 }
