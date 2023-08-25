@@ -8,4 +8,5 @@ export default defineConfig({
         { path: '/add-rule', component: 'rules' },
     ],
     npmClient: 'yarn',
+    mfsu: false,
 });
