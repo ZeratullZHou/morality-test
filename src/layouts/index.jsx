@@ -2,7 +2,7 @@ import { history, Outlet } from 'umi';
 import styles from './index.less';
 import { Menu } from 'antd';
 import { useState } from 'react';
-import { InfoCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, InfoCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import Login from '../pages/login';
 import { getCookie, delCookie } from '../utils';
 
@@ -17,6 +17,11 @@ const items = [
         key: '/rule',
         icon: <InfoCircleOutlined />,
     },
+    {
+        label: '新增规则',
+        key: '/add-rule',
+        icon: <AppstoreAddOutlined />,
+    },
 ];
 
 export default function Layout() {
@@ -30,7 +35,7 @@ export default function Layout() {
 
     const onRefresh = () => {
         setCurrent('/');
-    }
+    };
     const onExit = () => {
         delCookie('username');
         delCookie('name');
@@ -41,9 +46,9 @@ export default function Layout() {
             <div className={styles.navs}>
                 <Menu items={items} onClick={onClick} selectedKeys={[current]} mode="horizontal" />
                 <a className={styles.logout} onClick={onExit} href="">
-                    退出登录
+                    退出
                 </a>
-                <Outlet/>
+                <Outlet />
             </div>
         );
     else return <Login refresh={onRefresh} />;

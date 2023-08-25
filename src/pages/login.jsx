@@ -89,9 +89,6 @@ export default function Login(pros) {
                     name="normal_login"
                     style={{ width: '65%', textAlign: 'center', margin: '50px auto' }}
                     className={styles['loginForm']}
-                    initialValues={{
-                        remember: true,
-                    }}
                     onFinish={onFinish}
                 >
                     <Form.Item
@@ -124,10 +121,7 @@ export default function Login(pros) {
                         >
                             登录
                         </Button>
-                        或者{' '}
-                        <a onClick={() => setLogup(!logup)}>
-                            注册新用户!
-                        </a>
+                        或者 <a onClick={() => setLogup(!logup)}>注册新用户!</a>
                     </Form.Item>
                 </Form>
             </Spin>
